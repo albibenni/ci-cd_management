@@ -6,13 +6,10 @@ function main() {
 
   const result = configSchema.safeParse(argv[OPTIONS.CONFIG]);
 
-  if (result.success) {
-    console.log(result.data);
-  } else throw new Error("Not found");
-
-  // const buildPath = z.string({
-  //       argv["config"]}
-  //       error: ()=> return {mes);
+  if (!result.success) {
+    throw new Error("Not found");
+  }
+  console.log(result.data);
 }
 
 main();
