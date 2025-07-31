@@ -11,3 +11,10 @@ export const buildJSONSchema = z.object({
 });
 
 export type BuildJSON = z.infer<typeof buildJSONSchema>;
+
+export type ObjectValues<T> = T[keyof T];
+
+export const OPTIONS = {
+  CONFIG: "config",
+} as const;
+export type TOptions = ObjectValues<typeof OPTIONS>;
