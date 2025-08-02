@@ -1,7 +1,7 @@
 import yargs from "yargs";
 import type { BuildJSON } from "./types.ts";
 import { BuildJSONSchema, ConfigSchema, OPTIONS } from "./types.ts";
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { getSelectedFolder } from "./utils.ts";
 import pkg from "nunjucks";
 const { configure, render } = pkg;
@@ -31,11 +31,12 @@ function main() {
   const templateFolder = getSelectedFolder("templates");
   configure(templateFolder, { autoescape: true });
 
-  const file = render("Dockerfile", {
+  const dockerfile = render("Dockerfile", {
     serviceName: configurationData.serviceName,
     serviceType: configurationData.serviceType,
   });
-  console.log(file);
+  console.log(dockerfile);
+  writeFileSync("Dockerfile", dockerfile);
 }
 
 main();
