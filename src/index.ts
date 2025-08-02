@@ -2,6 +2,8 @@ import yargs from "yargs";
 import type { BuildJSON } from "./types.ts";
 import { BuildJSONSchema, ConfigSchema, OPTIONS } from "./types.ts";
 import { readFileSync } from "node:fs";
+import { configure } from "nunjucks";
+import { getSelectedFolder } from "./utils.ts";
 
 function main() {
   const argv = yargs(process.argv.slice(2))
@@ -23,6 +25,10 @@ function main() {
   const configurationData: BuildJSON = BuildJSONSchema.parse(
     JSON.parse(configuration),
   );
+
+  // Template engine
+  const templateFolder = getSelectedFolder("templates");
+  configure(templateFolder, { autoescape: true });
   console.log(configurationData);
 }
 
