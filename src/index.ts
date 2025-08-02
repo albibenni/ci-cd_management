@@ -1,5 +1,6 @@
 import yargs from "yargs";
 import { configSchema, OPTIONS } from "./types.ts";
+import { readFileSync } from "node:fs";
 
 function main() {
   const argv = yargs(process.argv.slice(2))
@@ -9,12 +10,15 @@ function main() {
     })
     .parseSync();
 
-  const result = configSchema.safeParse(argv[OPTIONS.CONFIG]);
+  const resultPath = configSchema.safeParse(argv[OPTIONS.CONFIG]);
 
-  if (!result.success) {
-    throw new Error(result.error.message);
+  if (!resultPath.success) {
+    throw new Error(resultPath.error.message);
   }
-  console.log(result.data);
+  console.log(resultPath.data);
+
+  const configuration = readFileSync(resultPath.data, { encoding: "utf8" });
+  console.log(configuration);
 }
 
 main();
