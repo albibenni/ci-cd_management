@@ -2,8 +2,9 @@ import yargs from "yargs";
 import type { BuildJSON } from "./types.ts";
 import { BuildJSONSchema, ConfigSchema, OPTIONS } from "./types.ts";
 import { readFileSync } from "node:fs";
-import { configure, render } from "nunjucks";
 import { getSelectedFolder } from "./utils.ts";
+import pkg from "nunjucks";
+const { configure, render } = pkg;
 
 function main() {
   const argv = yargs(process.argv.slice(2))
@@ -30,11 +31,11 @@ function main() {
   const templateFolder = getSelectedFolder("templates");
   configure(templateFolder, { autoescape: true });
 
-  render("Dockerfile", {
+  const file = render("Dockerfile", {
     serviceName: configurationData.serviceName,
     serviceType: configurationData.serviceType,
   });
-  console.log(configurationData);
+  console.log(file);
 }
 
 main();
