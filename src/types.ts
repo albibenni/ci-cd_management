@@ -8,6 +8,8 @@ export const ConfigSchema = z
 
 export const BuildJSONDockerfileSchema = z.object({
   preInstallCommands: z.array(z.string()),
+  postInstallCommands: z.array(z.string()),
+  installCommand: z.string(),
 });
 
 export const BuildJSONSchema = z.object({

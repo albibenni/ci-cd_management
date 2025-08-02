@@ -9,4 +9,10 @@ ENV SERVICE_TYPE "{{ serviceType }}"
 {{ command }}
 {% endfor %}
 
+RUN {{ dockerfile.installCommand }}
+
+{% for command in dockerfile.postInstallCommands %}
+{{ command }}
+{% endfor %}
+
 RUN "/bin/bash"

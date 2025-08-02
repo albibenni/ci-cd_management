@@ -3,6 +3,8 @@
   "serviceName": "my-name",
   "serviceType": "frontend",
   "dockerfile": {
-    "preInstallCommands": ["COPY myfile myfile"]
+    "preInstallCommands": ["COPY myfile myfile"],
+    "postInstallCommands": ["RUN other other"],
+    "installCommand": "pnpn install"
   }
 }
