@@ -31,10 +31,7 @@ function main() {
   const templateFolder = getSelectedFolder("templates");
   configure(templateFolder, { autoescape: true });
 
-  const dockerfile = render("Dockerfile", {
-    serviceName: configurationData.serviceName,
-    serviceType: configurationData.serviceType,
-  });
+  const dockerfile = render("Dockerfile", configurationData);
   console.log(dockerfile);
   writeFileSync("Dockerfile", dockerfile);
 }
