@@ -12,6 +12,7 @@ export const BuildJSONDockerfileSchema = z.object({
 
 export const BuildJSONSchema = z.object({
   name: z.string(),
+  serviceName: z.string(),
   serviceType: z.string(),
   dockerfile: BuildJSONDockerfileSchema,
 });

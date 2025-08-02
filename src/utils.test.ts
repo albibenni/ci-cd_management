@@ -44,4 +44,3 @@ describe("getSelectedFolder", () => {
     expect(result).toBe(expected);
   });
 });
-

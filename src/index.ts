@@ -2,7 +2,7 @@ import yargs from "yargs";
 import type { BuildJSON } from "./types.ts";
 import { BuildJSONSchema, ConfigSchema, OPTIONS } from "./types.ts";
 import { readFileSync } from "node:fs";
-import { configure } from "nunjucks";
+import { configure, render } from "nunjucks";
 import { getSelectedFolder } from "./utils.ts";
 
 function main() {
@@ -29,6 +29,11 @@ function main() {
   // Template engine
   const templateFolder = getSelectedFolder("templates");
   configure(templateFolder, { autoescape: true });
+
+  render("Dockerfile", {
+    serviceName: configurationData.serviceName,
+    serviceType: configurationData.serviceType,
+  });
   console.log(configurationData);
 }
 

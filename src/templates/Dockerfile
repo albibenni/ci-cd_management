@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 # generics
-ENV SERVICE_NAME "{{ service_name }}"
-ENV SERVICE_TYPE "{{ service_type }}"
+ENV SERVICE_NAME "{{ serviceName }}"
+ENV SERVICE_TYPE "{{ serviceType }}"
 
 RUN "/bin/bash"
