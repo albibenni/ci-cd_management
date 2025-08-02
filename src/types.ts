@@ -1,16 +1,23 @@
 import { z } from "zod/v4";
 
-export const configSchema = z
+export const ConfigSchema = z
   .string({
     error: "Config file path is required",
   })
   .min(1, "Config file path cannot be empty");
-export const buildJSONSchema = z.object({
-  name: z.string(),
-  serviceType: z.string(),
+
+export const BuildJSONDockerfileSchema = z.object({
+  preInstallCommands: z.array(z.string()),
 });
 
-export type BuildJSON = z.infer<typeof buildJSONSchema>;
+export const BuildJSONSchema = z.object({
+  name: z.string(),
+  serviceType: z.string(),
+  dockerfile: BuildJSONDockerfileSchema,
+});
+
+export type BuildJSON = z.infer<typeof BuildJSONSchema>;
+export type BuildJSONDockerfile = z.infer<typeof BuildJSONDockerfileSchema>;
 
 export type ObjectValues<T> = T[keyof T];
 

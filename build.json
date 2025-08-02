@@ -1,4 +1,7 @@
 {
   "name": "test-devops",
-  "serviceType": "frontend"
+  "serviceType": "frontend",
+  "dockerfile": {
+    "preInstallCommands": ["COPY myfile myfile"]
+  }
 }

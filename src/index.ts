@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import type { BuildJSON } from "./types.ts";
-import { buildJSONSchema, configSchema, OPTIONS } from "./types.ts";
+import { BuildJSONSchema, ConfigSchema, OPTIONS } from "./types.ts";
 import { readFileSync } from "node:fs";
 
 function main() {
@@ -11,7 +11,7 @@ function main() {
     })
     .parseSync();
 
-  const resultPath = configSchema.safeParse(argv[OPTIONS.CONFIG]);
+  const resultPath = ConfigSchema.safeParse(argv[OPTIONS.CONFIG]);
 
   if (!resultPath.success) {
     throw new Error(resultPath.error.message);
@@ -20,7 +20,7 @@ function main() {
 
   const configuration = readFileSync(resultPath.data, { encoding: "utf8" });
 
-  const configurationData: BuildJSON = buildJSONSchema.parse(
+  const configurationData: BuildJSON = BuildJSONSchema.parse(
     JSON.parse(configuration),
   );
   console.log(configurationData);
