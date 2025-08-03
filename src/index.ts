@@ -32,8 +32,11 @@ function main() {
   configure(templateFolder, { autoescape: true });
 
   const dockerfile = render("Dockerfile", configurationData);
+  const circleci = render("circleci.yml", configurationData);
   console.log(dockerfile);
+
   writeFileSync("Dockerfile", dockerfile);
+  writeFileSync("circleci.yml", circleci);
 }
 
 main();
